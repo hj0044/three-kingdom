@@ -32,6 +32,7 @@ export function createGame(player='liubei'){
  return {version:VERSION,day:0,seed:184,player,people:people.map(p=>({id:p[0],name:p[1],faction:p[2],role:p[3],stats:p[4],ambition:p[5],loyalty:p[6],station:p[7],historicRole:p[8],goal:p[9],goalSince:0,lastAction:null,alive:true,merit:0,relations:{},extensions:{availableFrom:p[10]?.startsWith('unlock:')?Number(p[10].slice(7)):0}})),cities,armies:[],logs:[{day:0,text:'184년 3월, 황건의 난이 일어났습니다. 이 시나리오는 핵심 전선을 압축한 역사 기반 미니 캠페인입니다.'}],pending:null,nextArmy:1,extensions:{family:null},scenario:'184-historical-core'};
 }
 export const actor=s=>s.people.find(p=>p.id===s.player);
+export const startingCity=s=>actor(s)?.station??0;
 export const owned=(s,id)=>s.cities[id]?.faction===actor(s).faction;
 export const personById=(s,id)=>s.people.find(p=>p.id===id);
 export function authority(s,id){const p=actor(s),c=s.cities[id];if(!p?.alive||!c||c.faction!==p.faction)return {level:'none',label:'권한 없음',detail:'다른 세력의 도시는 조작할 수 없습니다.'};if(p.role==='대장군')return {level:'command',label:'대장군 군령',detail:'한 조정군의 모든 도시와 부대에 군령을 내릴 수 있습니다.'};if(p.role==='군주'||p.role==='황건 수령')return c.governor===p.id?{level:'command',label:'세력 수장',detail:'직할 거점의 내정·위임·출진을 결정합니다.'}:{level:'none',label:'직할지 아님',detail:'다른 거점은 아직 직접 지휘할 수 없습니다.'};if(c.governor===p.id&&['태수','현령'].includes(p.role))return {level:'command',label:'지방관',detail:'부임한 도시의 내정·위임·출진을 결정합니다.'};if(p.station===id)return {level:'lead',label:'임지·부대 지휘',detail:'임지에서 내정 건의를 내고, 자신의 부대를 이끌 수 있습니다.'};return {level:'none',label:'관할 밖',detail:'이곳은 현재 임지나 직할지가 아닙니다.'};}
