@@ -116,3 +116,11 @@ select,input[type=number]{border-radius:8px;min-height:48px}
  .appointment-row .btn,.recruit-actions .btn{width:100%}
  .recruit-actions{grid-template-columns:minmax(0,1fr) 92px}
 }
+.home-resources{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:11px}
+.home-resources>div:nth-child(2){border-right:0}
+.home-resources>div:nth-child(3){padding-left:0}
+.economy-summary{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;padding:12px 0 4px;border-top:1px solid var(--line);margin-top:13px}
+.economy-summary small{display:block;color:var(--muted);font-size:10px;margin-bottom:5px}
+.economy-summary b{font-size:12px;font-variant-numeric:tabular-nums}
+.economy-summary .negative{color:var(--red)}
+.economy-summary{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:11px}
