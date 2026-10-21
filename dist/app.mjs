@@ -1,4 +1,4 @@
-import {createGame,people,factions,roads,actor,owned,authority,order,setPolicy,interact,march,advance,resolve,restore,succeed,recruit,appoint,startingCity} from './engine.mjs';
+import {createGame,people,factions,roads,citySeed,actor,owned,authority,order,setPolicy,interact,march,advance,resolve,restore,succeed,recruit,appoint,startingCity} from './engine.mjs';
 const $=s=>document.querySelector(s),esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),fmt=n=>Math.floor(n).toLocaleString('ko-KR');
 const KEY='three-kingdom.save.v1';let state=null,tab='천하',selected=0,peopleFilter='all',saveError='',toastTimer;
 try{const raw=localStorage.getItem(KEY);if(raw)state=restore(raw);}catch{saveError='저장을 읽지 못했습니다. 새 게임 시작 전에 저장 파일을 확인하세요.';}
